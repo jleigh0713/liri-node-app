@@ -37,12 +37,15 @@ function getTweets()
 }
 
 
+//defining omdb function for getting movie info
 function movieThis(movie)
 {
+  //creating URL variable which is the omdb api url and the movie that was entered and requesting the plot with rotten tomatoes info
   var URL = 'http://www.omdbapi.com/?t=' + movie + '&plot=short&tomatoes=true';
-
+  //requesting the error, response, and body from the api url
   request(URL, (error, response, body) =>
   {
+  	// if there is no error and the response code is 200 meaning everything is OK then provide info
     if(!error && response.statusCode == 200)
     {
       console.log("Title: " + JSON.parse(body).Title);
@@ -56,8 +59,10 @@ function movieThis(movie)
     } 
     else
     {
+   		//if error then provide error
       console.log('Error' + error);
     }
+     //if movie is not entered then default to Mr.Nobody
     if(movie === null)
     {
       console.log("If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/" + "\nit's on Netflix!");
@@ -65,6 +70,7 @@ function movieThis(movie)
   });
 }
 
+//taking in command prompts and using switch instead of if else
 switch (command)
 {
 	case 'my-tweets':
@@ -76,9 +82,7 @@ switch (command)
 	break;
 }
 
-
-
-movieThis();
+//trying to see if it was grabbing my tweets
 getTweets();
 
 
