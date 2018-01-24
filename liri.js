@@ -10,7 +10,7 @@ var inquirer = require('inquirer');
 var client = new twitter(keys.twitter);
 //var spotify = require('spotify');
 
-
+console.log(keys.twitter);
 //Defining function to get my tweets from twitter account
 function getTweets() 
 {
@@ -21,7 +21,7 @@ function getTweets()
 		//grab an error if there is one and display it
 		if (err) 
 		{
-       		console.log('Error occurred: ' + err);
+       		console.log('Error occurred: ' + JSON.stringify(err));
         	return;
         //if there is not an error
     	} 
@@ -36,15 +36,19 @@ function getTweets()
 	});
 }
 
-
+console.log
 //defining omdb function for getting movie info
 function movieThis(movie)
 {
   //creating URL variable which is the omdb api url and the movie that was entered and requesting the plot with rotten tomatoes info
-  var URL = 'http://www.omdbapi.com/?t=' + movie + '&plot=short&tomatoes=true';
+  var URL = 'http://www.omdbapi.com/?t=' + movie + '&plot=short&tomatoes=true&apikey=trilogy';
+
   //requesting the error, response, and body from the api url
   request(URL, (error, response, body) =>
   {
+    console.log(response.statusCode);
+     console.log(URL);
+
   	// if there is no error and the response code is 200 meaning everything is OK then provide info
     if(!error && response.statusCode == 200)
     {
@@ -77,13 +81,10 @@ switch (command)
 	getTweets();
 	break;
 
-	case 'move-this':
+	case 'movie-this':
 	movieThis(movie);
 	break;
 }
-
-//trying to see if it was grabbing my tweets
-getTweets();
 
 
 //checking to see if the file is even working
