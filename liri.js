@@ -87,5 +87,4 @@ switch (command)
 }
 
 
-//checking to see if the file is even working
-console.log("Hello");
+
